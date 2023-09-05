@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Widget Install Guide</title>
+
+    <style>
+      body {
+        margin: 0;
+      }
+
+      [container] {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      [step] {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        width: max-content;
+        max-width: 100vw;
+      }
+
+      [screenshot] {
+        height: 100vh;
+        width: inherit;
+      }
+
+      @media (min-width: 768px) {
+        [small-screen] {
+          display: none;
+        }
+
+        [screenshot] {
+          margin-right: 10px;
+        }
+
+        [step] {
+          flex-direction: row;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div container>
+      <p small-screen>Scroll down to start.</p>
+      <div step>
+        <img screenshot src="./images/1.PNG" />
+        <p>
+          Welcome to my quickly thrown together widget install guide!
+          <br /><br />
+
+          To start, go to
+          <a href="https://widget.connotcode.com">widget.connotcode.com</a>.
+          Then click "Sign Up" or "Log In". Also now might be a good time to
+          mention this only works on iOS. (Scroll down to continue)
+        </p>
+      </div>
+      <div step>
+        <img screenshot src="./images/3.PNG" />
+        <p>
+          Put in your school email (name@bernardsboe.com), click next and put in
+          your genesis password. This is your 6 digit student ID number or an
+          actual password if you set one.
+          <br />
+          <br />
+          <em>The widget</em> logs you in to genesis with your credentials to
+          get your schedule. So if you ever change your password, you may need
+          to log in again to update it.
+        </p>
+      </div>
+      <div step>
+        <img screenshot src="./images/4.PNG" />
+        <p>
+          If all goes well, you should now be on your account page. You will now
+          need to download the
+          <a href="https://apps.apple.com/us/app/scriptable/id1405459188"
+            >Scriptable</a
+          >
+          app. This app allows you to write code that runs on your phone and Its
+          what I originally used to make this widget a few years ago on my first
+          day of high school.
+        </p>
+      </div>
+      <div step>
+        <img screenshot src="./images/6.PNG" />
+        <p>
+          Now click to download the widget script. Just so you know, the script
+          is customized for you with your account ID. This means that if anyone
+          else gets it, they will be able to see your schedule. Which could be a
+          good thing i guess.
+        </p>
+      </div>
+      <div step>
+        <img screenshot src="./images/8.PNG" />
+        <p>
+          Now that its downloaded, open the downloads page in Safari. (Or
+          whatever web browser you use).
+        </p>
+      </div>
+      <div step>
+        <img screenshot src="./images/9.PNG" />
+        <p>Click on the script.</p>
+      </div>
+      <div step>
+        <img screenshot src="./images/10.PNG" />
+        <p>Ignore all the scarry text and click the share button.</p>
+      </div>
+      <div step>
+        <img screenshot src="./images/11.PNG" />
+        <p>
+          Now click the scriptable app. (You might have to scroll down to find
+          the app).
+        </p>
+      </div>
+      <div step>
+        <img screenshot src="./images/12.PNG" />
+        <p>
+          Now that its opened in the scriptable app, click "Add to my scripts".
+        </p>
+      </div>
+      <div step>
+        <img screenshot src="./images/13.PNG" />
+        <p>
+          You can now click the little play button in the bottom right corner to
+          make sure everything is working.
+        </p>
+      </div>
+      <div step>
+        <img screenshot src="./images/14.PNG" />
+        <p>
+          If it is, you should see your schedule. (Because we go to all of our
+          classes on the first day the text is kinda overflowing outside of the
+          widget, but this wont be a problem for most of the year.)
+        </p>
+      </div>
+      <div step>
+        <img screenshot src="./images/15.PNG" />
+        <p>
+          Now you can add the widget to your widget panel thing. (I like this
+          because you can access it without unlocking your phone). Anyway, click
+          "Edit" then the "+" button.
+        </p>
+      </div>
+      <div step>
+        <img screenshot src="./images/18.PNG" />
+        <p>Select the Scriptable widget.</p>
+      </div>
+      <div step>
+        <img screenshot src="./images/19.PNG" />
+        <p>Choose how big you want it. I would recommend the middle size.</p>
+      </div>
+      <div step>
+        <img screenshot src="./images/20.PNG" />
+        <p>Add the widget and tap on it to open its configuration.</p>
+      </div>
+      <div step>
+        <img screenshot src="./images/21.PNG" />
+        <p>Click "Choose" to select the script to run for the widget.</p>
+      </div>
+      <div step>
+        <img screenshot src="./images/22.PNG" />
+        <p>Select the "Classes" script and close the menu.</p>
+      </div>
+      <div step>
+        <img screenshot src="./images/25.PNG" />
+        <p>
+          And thats all! You can configure the background gradient and text
+          color if you would really like. I wont go into depth here but you have
+          to edit the script in Scriptable and change the values under "// User
+          config".
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
