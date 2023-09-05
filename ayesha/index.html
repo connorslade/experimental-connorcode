@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ayesha Erotica</title>
+    <link rel="stylesheet" href="assets/index.css" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script src="assets/index.js"></script>
+  </head>
+  <body
+    x-data="{ albums: null, filter: filter_from_id() }"
+    x-init="fetch('assets/songs.json').then(x => x.json()).then(x => albums = x);"
+  >
+    <div center>
+      <img src="assets/title.gif" desktop-only />
+      <img src="assets/ayesha.gif" mobile-only />
+      <img
+        src="assets/erotica.gif"
+        mobile-only
+        style="transform: translateY(-20px); margin-bottom: -20px"
+      />
+
+      <table nav>
+        <thead>
+          <tr>
+            <td><a href="index.html">Music</a></td>
+            <td><a href="about.html">About</a></td>
+            <td>
+              <a href="archive.zip" :href="`${CDN_ADDRESS}/archive.zip`"
+                >Download</a
+              >
+            </td>
+          </tr>
+        </thead>
+      </table>
+
+      <p>
+        Ayesha Erotica, known professionally as Ayesha Nicole Smith, Singer,
+        songwriter, and producer. She was born on August 11, 1996, in Huntington
+        Beach, California. She was best known for her ultra-feminine style. She
+        produced music in a variety of genres, often with themes of eroticism
+        and sexual liberation. She often collaborated with Slayyyter, Petey
+        Plastic, and That Kid. Their music together is still popular and
+        accessible today.
+      </p>
+
+      <div>
+        <img
+          desktop-only
+          src="assets/speaker-left.gif"
+          style="transform: translateY(-12px)"
+        />
+        <img src="assets/music.gif" />
+        <img
+          desktop-only
+          src="assets/speaker-right.gif"
+          style="transform: translateY(-12px)"
+        />
+      </div>
+
+      <table nav>
+        <thead>
+          <tr>
+            <td><a href="#albums" x-on:click="filter = null">Albums</a></td>
+            <td>
+              <a href="#singles" x-on:click="filter = 'Singles'">Singles</a>
+            </td>
+            <td>
+              <a href="#instrumentals" x-on:click="filter = 'Instrumentals'"
+                >Instrumentals</a
+              >
+            </td>
+            <td><a href="#demos" x-on:click="filter = 'Demos'">Demos</a></td>
+            <td>
+              <a href="#unreleased" x-on:click="filter = 'Misc/ Unreleased'"
+                >Unreleased</a
+              >
+            </td>
+            <td>
+              <a href="#snippets" x-on:click="filter = 'Snippets'">Snippets</a>
+            </td>
+            <td>
+              <a href="#alt-mix" x-on:click="filter = 'Alt Mix'">Alt Mix</a>
+            </td>
+            <td><a href="#covers" x-on:click="filter = 'Covers'">Covers</a></td>
+            <td>
+              <a href="#acapella" x-on:click="filter = 'Acapella'">Acapella</a>
+            </td>
+          </tr>
+        </thead>
+      </table>
+
+      <img x-show="albums == null" src="assets/loading.gif" />
+
+      <template
+        x-for="i in Object.entries(albums)
+                    .filter(x => album_filter(x[0], filter, x[1].tracks.length))
+                    .sort((a, b) => b[1].year - a[1].year)
+              "
+      >
+        <div album-container>
+          <template x-if="!SPECIAL_ALBUMS.includes(i[0])">
+            <h1 x-text="`${i[0]} &ndash; ${i[1].year}`"></h1>
+          </template>
+
+          <template x-if="SPECIAL_ALBUMS.includes(i[0])">
+            <h1 x-text="`${i[0]}`"></h1>
+          </template>
+
+          <img :src="`${CDN_ADDRESS}${i[1].album_cover}`" />
+
+          <br margin />
+
+          <template x-if="window.innerWidth > 800">
+            <table>
+              <thead>
+                <th>Name</th>
+                <th>Song</th>
+                <th>Length</th>
+              </thead>
+              <tbody>
+                <template
+                  x-for="j in i[1].tracks.sort((a, b) => a.track - b.track)"
+                >
+                  <tr>
+                    <td x-text="j.title"></td>
+                    <td>
+                      <audio
+                        controls
+                        preload="none"
+                        x-on:playing="stop_audio($el)"
+                        :src="`${CDN_ADDRESS}${j.path}`"
+                      ></audio>
+                    </td>
+                    <td x-text="length(j.duration)"></td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </template>
+
+          <template x-if="window.innerWidth <= 800">
+            <table>
+              <tbody>
+                <template
+                  x-for="j in i[1].tracks.sort((a, b) => a.track - b.track)"
+                >
+                  <tr>
+                    <td>
+                      <p
+                        x-text="`${j.title} &ndash; ${length(j.duration)}`"
+                      ></p>
+
+                      <audio
+                        controls
+                        preload="none"
+                        x-on:playing="stop_audio($el)"
+                        :src="`${CDN_ADDRESS}${j.path}`"
+                      ></audio>
+                    </td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </template>
+        </div>
+      </template>
+    </div>
+  </body>
+</html>
