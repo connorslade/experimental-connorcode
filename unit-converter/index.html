@@ -4,29 +4,97 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unit Converter</title>
+    <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <h1>Unit Converter</h1>
+    <div container>
+      <div main>
+        <h1>Unit Converter</h1>
+        <p>
+          <a href="https://github.com/Basicprogrammer10/unit-convert">
+            unit-converter
+          </a>
+          v0.1.0-alpha by Connor Slade.
+        </p>
 
-    <p>
-      <a href="https://github.com/Basicprogrammer10/unit-convert">
-        unit-converter
-      </a>
-      v0.1.0-alpha by Connor Slade.
-    </p>
+        <ul history></ul>
 
-    <ul history></ul>
+        <form style="display: note">
+          <input input type="text" name="input" />
+          <button type="submit">Convert</button>
+        </form>
+      </div>
 
-    <form style="display: hidden">
-      <input input type="text" name="input" />
-      <button type="submit">Convert</button>
-    </form>
+      <div units>
+        <p>Loading...</p>
+      </div>
+    </div>
 
     <script type="module">
-      import init, { convert } from "./wasm.js";
+      import init, { convert, get_units, get_derived_units } from "./wasm.js";
 
       init().then(() => {
         document.querySelector("form").style.display = "block";
+        const units_div = document.querySelector("div[units]");
+        units_div.innerHTML = "";
+
+        {
+          const units = get_units();
+          let unit_spaces = {};
+          for (let unit of units) {
+            if (!unit_spaces[unit.space]) unit_spaces[unit.space] = [];
+            unit_spaces[unit.space].push(unit);
+          }
+
+          const h2 = document.createElement("h2");
+          h2.textContent = "Units";
+          units_div.appendChild(h2);
+
+          for (let space in unit_spaces) {
+            const h3 = document.createElement("h3");
+            h3.textContent = space;
+            units_div.appendChild(h3);
+
+            const ul = document.createElement("ul");
+            for (let unit of unit_spaces[space]) {
+              const li = document.createElement("li");
+              li.textContent = unit.name;
+              if (unit.aliases.length != 0) {
+                const aliases = document.createElement("span");
+                aliases.textContent = ` (${unit.aliases.join(", ")})`;
+                li.appendChild(aliases);
+              }
+              ul.appendChild(li);
+            }
+            units_div.appendChild(ul);
+          }
+        }
+
+        {
+          const derived_units = get_derived_units();
+
+          const h2 = document.createElement("h2");
+          h2.textContent = "Derived Units";
+          units_div.appendChild(h2);
+          for (let unit of derived_units) {
+            const li = document.createElement("h3");
+            li.textContent = unit.name;
+            units_div.appendChild(li);
+
+            const ul = document.createElement("ul");
+
+            if (unit.aliases.length > 0) {
+              const aliases = document.createElement("li");
+              aliases.textContent = `Aliases: ${unit.aliases.join(", ")}`;
+              ul.appendChild(aliases);
+            }
+
+            const derived_from = document.createElement("li");
+            derived_from.textContent = `Derived from: ${unit.derived_from}`;
+            ul.appendChild(derived_from);
+            units_div.appendChild(ul);
+          }
+        }
       });
 
       document.querySelector("form").addEventListener("submit", (e) => {
