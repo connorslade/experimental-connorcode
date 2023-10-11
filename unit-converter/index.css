@@ -3,6 +3,10 @@ body {
   margin-left: 1rem;
 }
 
+a {
+  color: #000fdd;
+}
+
 [container] {
   display: flex;
   flex-direction: row;

@@ -11,10 +11,12 @@
       <div main>
         <h1>Unit Converter</h1>
         <p>
-          <a href="https://github.com/Basicprogrammer10/unit-convert">
-            unit-converter
-          </a>
-          v0.1.0-alpha by Connor Slade.
+          <a href="https://github.com/Basicprogrammer10/unit-convert"
+            >unit-converter</a
+          >
+          <span version></span> by Connor Slade. <br />
+          This was meant to just be a command line application, but I finally
+          gave in and tried Web Assembly.
         </p>
 
         <ul history></ul>
@@ -31,9 +33,16 @@
     </div>
 
     <script type="module">
-      import init, { convert, get_units, get_derived_units } from "./wasm.js";
+      import init, {
+        version,
+        convert,
+        get_units,
+        get_derived_units,
+      } from "./wasm.js";
 
       init().then(() => {
+        document.querySelector("[version]").textContent = `v${version()}`;
+
         document.querySelector("form").style.display = "block";
         const units_div = document.querySelector("div[units]");
         units_div.innerHTML = "";
@@ -70,7 +79,7 @@
                 link.target = "_blank";
                 link.rel = "noopener noreferrer";
                 link.href = unit.link;
-                link.textContent = " ※";
+                link.textContent = "※";
                 li.appendChild(link);
               }
               if (unit.aliases.length != 0) {
@@ -126,7 +135,7 @@
 
         const history = document.querySelector("ul[history]");
         const li = document.createElement("li");
-        li.textContent = `${input.value} = ${output}`;
+        li.textContent = `${input.value.replace("=>", "⇒")} = ${output}`;
         history.appendChild(li);
         input.value = "";
       });
