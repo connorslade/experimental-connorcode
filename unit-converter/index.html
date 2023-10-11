@@ -58,7 +58,21 @@
             const ul = document.createElement("ul");
             for (let unit of unit_spaces[space]) {
               const li = document.createElement("li");
-              li.textContent = unit.name;
+              li.classList.add("units");
+              {
+                const name = document.createElement("span");
+                name.textContent = unit.name;
+                if (unit.description) name.title = unit.description;
+                li.appendChild(name);
+              }
+              if (unit.link) {
+                const link = document.createElement("a");
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+                link.href = unit.link;
+                link.textContent = " ※";
+                li.appendChild(link);
+              }
               if (unit.aliases.length != 0) {
                 const aliases = document.createElement("span");
                 aliases.textContent = ` (${unit.aliases.join(", ")})`;
@@ -71,6 +85,7 @@
         }
 
         {
+          // TODO: Add descriptions and links
           const derived_units = get_derived_units();
 
           const h2 = document.createElement("h2");
