@@ -13,15 +13,16 @@
     if (e.code === "Space") {
       let now = new Date().getTime();
       let delta = now - timestamp;
-      timestamp = now;
       if (timestamp !== 0)
         history.update((v) => {
           v.push(delta);
           return v;
         });
+      timestamp = now;
 
       let last_name = current.name;
       while (current.name === last_name) current = random();
+      e.preventDefault();
     } else if (e.code === "KeyR") {
       history.set([]);
     }
